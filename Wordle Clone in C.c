@@ -8,14 +8,13 @@
 
 FILE *fr;
 char str[100];
-int c,l,test,playAgain;
+int c,l,test,playAgain,i,j;
 
 bool process(const char* compAnswer, const char* userGuess)
 {
 
   char clue[6] = {'-', '-', '-', '-', '-', '\0'};
   bool ansFlags[5] = {false, false, false, false, false};
-  int i,j;
 
   for (i=0; i<5; i++)
   {
@@ -75,7 +74,7 @@ void play()
     printf("RULES :\n");
     printf("\033[0m");
     printf("\n  - Guess the WORD in 6 tries");
-    printf("\n  - Each guess must be a valid 5 letter word. Hit ENTER to submit");
+    printf("\n  - Each guess must be a valid 5-letter word. Hit ENTER to submit");
     printf("\n  - All alphabets are in lower case. Alphabets can be repeated");
     printf("\n  - After each guess, the color of the letters will change to show how \n    close your guess was to the word");
     printf("\n\n ");
@@ -121,15 +120,30 @@ void play()
     char* randAnswer = wordsList[rand()%wordCounter];
     int numOfGuesses = 0;
     bool correctGuess = false;
+    bool invalidInput = false;
     char* guess = malloc(6*sizeof(char));
 
     while (numOfGuesses < 6 && !correctGuess)
     {
+        invalidInput = false;
         printf("\n Input a 5-letter word and press enter: ");
         scanf("%s", guess);
         if(strlen(guess)!=5)
         {
             printf("\n Invalid input.\n");
+            continue;
+        }
+        for(i=0;guess[i]!='\n';i++)
+        {
+            if(!isalpha(guess[i]))
+            {
+                printf("\n Invalid input.\n ");
+                invalidInput = true;
+                break;
+            }
+        }
+        if(invalidInput)
+        {
             continue;
         }
         printf("\n ");
@@ -186,6 +200,14 @@ void menu()
     fgets(str, sizeof(str), stdin);
     c = strcmp(str,"play\n");
     l = strlen(str);
+    for(i=0;str[i]!='\n';i++)
+    {
+        if(!isalpha(str[i]))
+        {
+            printf("\n Invalid. Please enter a 5-letter word or continue playing.\n\n ");
+            menu();
+        }
+    }
     if(l==6)
     {
         fprintf(fr, "%s", str);
@@ -199,7 +221,7 @@ void menu()
     }
     else if(l!=6&&test==0)
     {
-        printf("\n Invalid. Please enter a 5 letter word or continue playing.\n ");
+        printf("\n Invalid. Please enter a 5-letter word or continue playing.\n\n ");
         menu();
     }
     fclose(fr);
@@ -213,7 +235,7 @@ void main()
     printf("\033[4;96m");
     printf("Welcome to C-Wordle!\n");
     printf("\033[0m");
-    printf("\n If you'd like to add words to the game's vocabulary, put in a valid 5 letter word and press ENTER.\n");
+    printf("\n If you'd like to add words to the game's vocabulary, put in a valid 5-letter word and press ENTER.\n");
     printf("\n Enter 'play' at any time if you'd like to continue playing.\n\n ");
     test=0;
     menu();
