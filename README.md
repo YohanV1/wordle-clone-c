@@ -1,5 +1,5 @@
 # CLAP4-Wordle-Clone-in-C
-A very simple clone of Wordle made using C. This is a mini-project for our CLAP4 component at my university. The main purpose of this project was to explore file manipulation and understand how different concepts in C interact with each other. 
+A very simple clone of Wordle made using C. This is a mini-project for my CLAP4 component at university. The main purpose of this project was to explore file manipulation and understand how different concepts in C interact with each other. 
 The project compiles in VS Code and Code::Blocks and runs in DOS.
 
 ## About Wordle:
