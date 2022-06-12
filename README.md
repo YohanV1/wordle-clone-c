@@ -16,7 +16,7 @@ Wordle is a web-based word game created and developed by Welsh software engineer
   - If an alphabet turns red, the letter is in the word but in the wrong spot.
   - If an alphabet turns white, the letter is not in the word.
 
-The application is intelligent when it comes to double letter guesses. If the guess is 'bluff' and the word is 'flaunt', only ONE of the f's will display in red. 
+The application is intelligent when it comes to double letter guesses. If the guess is 'bluff' and the word is 'facet', only ONE of the f's will display in red. 
 The program will not allow you to include numbers or special characters in your guesses. It will also check to see if your guess has the required number of letters.
 
 A word is pulled randomly from a pool of 2315 words. This is the same set of words used in the official Wordle game by The New York Times.
