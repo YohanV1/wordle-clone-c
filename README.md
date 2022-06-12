@@ -16,12 +16,14 @@ Wordle is a web-based word game created and developed by Welsh software engineer
   - If an alphabet turns red, the letter is in the word but in the wrong spot.
   - If an alphabet turns white, the letter is not in the word.
 
-The application is intelligent when it comes to double letter guesses. If the guess is 'Abyss' and the word is 'Space', only one of the s' will display in red. 
+The application is intelligent when it comes to double letter guesses. If the guess is 'bluff' and the word is 'flaunt', only ONE of the f's will display in red. 
+The program will not allow you to include numbers or special characters in your guesses. It will also check to see if your guess has the required number of letters.
 
-Since the aim of this project was to explore file manipulation, I have not added an extensive list of 5-letter words. If the player wishes to add to the game's vocabulary, the code provides a way to do so.
+A word is pulled randomly from a pool of 2315 words. This is the same set of words used in the official Wordle game by The New York Times.
+
+If the player wishes to add to the game's vocabulary, the code provides a way to do so. The feature is mostly redundant, but I have added it just to understand how strings can be printed to files.
 
 ## Usage:
 Download the executable file and text file from the releases section. Make sure both the files are at the same file location.
 You should be presented with the 'title screen' of the game when the application is launched.
 The code has been written to run on most terminals. It has been tested on Windows 10.
-
