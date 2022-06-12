@@ -4,7 +4,7 @@
 #include <time.h>
 #include <string.h>
 
-#define MAX_WORDS 2315
+#define MAX_WORDS 2500
 
 FILE *fr;
 char str[100];
