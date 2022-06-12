@@ -4,11 +4,51 @@
 #include <time.h>
 #include <string.h>
 
-#define MAX_WORDS 50
+#define MAX_WORDS 2315
 
 FILE *fr;
 char str[100];
 int c,l,test,playAgain,i,j;
+
+void menu()
+{
+    fr = fopen("wordlist.txt", "a");
+    fgets(str, sizeof(str), stdin);
+    c = strcmp(str,"play\n");
+    l = strlen(str);
+    for(i=0;str[i]!='\n';i++)
+    {
+        if(!isalpha(str[i]))
+        {
+            printf("\033[1;96m");
+            printf("\n Word must only contain letters\n\n ");
+            printf("\033[0m");
+            menu();
+        }
+    }
+    if(l==6)
+    {
+        fprintf(fr, "%s", str);
+        str[l-1] = 0;
+        printf("\033[1;92m");
+        printf("\n %s has been added.\n\n ", str);
+        printf("\033[0m");
+    }
+    else if(c==0)
+    {
+        test=1;
+        play();
+    }
+    else if(l!=6&&test==0)
+    {
+        printf("\033[1;96m");
+        printf("\n Word can only have 5 letters\n\n ");
+        printf("\033[0m");
+        menu();
+    }
+    fclose(fr);
+    menu();
+}
 
 bool process(const char* compAnswer, const char* userGuess)
 {
@@ -119,31 +159,59 @@ void play()
 
     char* randAnswer = wordsList[rand()%wordCounter];
     int numOfGuesses = 0;
+    int flag = 0;
     bool correctGuess = false;
     bool invalidInput = false;
     char* guess = malloc(6*sizeof(char));
 
     while (numOfGuesses < 6 && !correctGuess)
     {
+        flag=0;
         invalidInput = false;
+        printf("\033[1;96m");
+        printf("\n Attempts left: %d", (6-numOfGuesses));
+        printf("\033[0m");
         printf("\n Input a 5-letter word and press enter: ");
         scanf("%s", guess);
         if(strlen(guess)!=5)
         {
-            printf("\n Invalid input.\n");
+            printf("\033[1;97m");
+            printf("\n Word must have 5 letters.");
+            printf("\033[0m");
             continue;
         }
-        for(i=0;guess[i]!='\n';i++)
+        for(i=0;guess[i]!='\0';i++)
         {
             if(!isalpha(guess[i]))
             {
-                printf("\n Invalid input.\n ");
+                printf("\033[1;97m");
+                printf("\n Word must only contain letters.");
+                printf("\033[0m");
                 invalidInput = true;
                 break;
             }
         }
+        for(i=0;i<wordCounter;i++)
+        {
+            if(strcmp(guess,wordsList[i])==0)
+            {
+                flag=1;
+                break;
+            }
+            else
+            {
+             flag=0;
+            }
+        }
         if(invalidInput)
         {
+            continue;
+        }
+        if(flag==0)
+        {
+            printf("\033[1;97m");
+            printf("\n Word does not exist.");
+            printf("\033[0m");
             continue;
         }
         printf("\n ");
@@ -194,40 +262,6 @@ void play()
     }
 }
 
-void menu()
-{
-    fr = fopen("wordlist.txt", "a");
-    fgets(str, sizeof(str), stdin);
-    c = strcmp(str,"play\n");
-    l = strlen(str);
-    for(i=0;str[i]!='\n';i++)
-    {
-        if(!isalpha(str[i]))
-        {
-            printf("\n Invalid. Please enter a 5-letter word or continue playing.\n\n ");
-            menu();
-        }
-    }
-    if(l==6)
-    {
-        fprintf(fr, "%s", str);
-        str[l-1] = 0;
-        printf("\n %s has been added.\n\n ", str);
-    }
-    else if(c==0)
-    {
-        test=1;
-        play();
-    }
-    else if(l!=6&&test==0)
-    {
-        printf("\n Invalid. Please enter a 5-letter word or continue playing.\n\n ");
-        menu();
-    }
-    fclose(fr);
-    menu();
-}
-
 void main()
 {
     system("cls");
@@ -236,7 +270,11 @@ void main()
     printf("Welcome to C-Wordle!\n");
     printf("\033[0m");
     printf("\n If you'd like to add words to the game's vocabulary, put in a valid 5-letter word and press ENTER.\n");
-    printf("\n Enter 'play' at any time if you'd like to continue playing.\n\n ");
+    printf("\n Enter 'play' at any time if you'd like to continue playing.");
+    printf("\033[1;96m");
+    printf("\n\n --------------------------------------------------------------------- \n");
+    printf("\033[0m");
+    printf("\n ");
     test=0;
     menu();
 }
