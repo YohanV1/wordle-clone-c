@@ -1,6 +1,5 @@
 # CLAP4-Wordle-Clone-in-C
-A very simple clone of Wordle made using C. This is a mini-project for my CLAP4 component at university. The main purpose of this project was to explore file manipulation and understand how different concepts in C interact with each other. 
-The project compiles in VS Code and Code::Blocks and runs in DOS.
+A very simple clone of Wordle made using C. The main purpose of this project was to explore file manipulation and understand how different concepts in C interact with each other. The project compiles in VS Code and Code::Blocks and runs in DOS.
 
 ## About Wordle:
 Wordle is a web-based word game created and developed by Welsh software engineer Josh Wardle, and owned and published by The New York Times Company.
