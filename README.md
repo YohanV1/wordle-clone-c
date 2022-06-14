@@ -18,11 +18,11 @@ Wordle is a web-based word game created and developed by Welsh software engineer
 The application is intelligent when it comes to double letter guesses. If the guess is 'bluff' and the word is 'facet', only ONE of the f's will display in red. 
 The program will not allow you to include numbers or special characters in your guesses. It will also check to see if your guess has the required number of letters.
 
-A word is pulled randomly from a pool of 2315 words. This is the same set of words used in the official Wordle game by The New York Times.
+A word solution is pulled randomly from a pool of 2315 words in the "WORDS.txt" file. The "ALLWORDS.txt" file contains the list of all accepted words. These are the same sets of words used in the official Wordle game by The New York Times.
 
 If the player wishes to add to the game's vocabulary, the code provides a way to do so. The feature is mostly redundant, but I have added it just to understand how strings can be printed to files.
 
 ## Usage:
-Download the executable file and text file from the releases section. Make sure both the files are at the same file location.
+Download the executable file and the two text files from the releases section. Make sure all three files are at the same file location.
 You should be presented with the 'title screen' of the game when the application is launched.
 The code has been written to run on most terminals. It has been tested on Windows 10.
