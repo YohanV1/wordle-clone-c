@@ -246,12 +246,18 @@ void play()
         printf(".\n\n ");
     }
 
-    for (int i=0; i<wordCounter; i++)
+    for (i=0; i<wordCounter; i++)
     {
         free(wordsList[i]);
     }
+    for (j=0; j<allWordCounter; j++)
+    {
+        free(allWordsList[j]);
+    }
     free(wordsList);
+    free(allWordsList);
     free(fiveLetterWordLoader);
+    free(fiveLetterAllWordLoader);
     free(guess);
 
     printf("\033[1;97m");
