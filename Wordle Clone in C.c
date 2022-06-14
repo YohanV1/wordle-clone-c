@@ -5,14 +5,15 @@
 #include <string.h>
 
 #define MAX_WORDS 2500
+#define ALL_WORDS 12947
 
-FILE *fr;
+FILE *fr,*fr1;
 char str[100];
 int c,l,test,playAgain,i,j;
 
 void menu()
 {
-    fr = fopen("wordlist.txt", "a");
+    fr = fopen("WORDS.txt", "a");
     fgets(str, sizeof(str), stdin);
     c = strcmp(str,"play\n");
     l = strlen(str);
@@ -144,19 +145,29 @@ void play()
 
 
     char** wordsList = calloc(MAX_WORDS, sizeof(char*));
+    char** allWordsList = calloc(ALL_WORDS, sizeof(char*));
     int wordCounter = 0;
+    int allWordCounter = 0;
     char* fiveLetterWordLoader = malloc(6*sizeof(char));
-    fr = fopen("wordlist.txt", "r");
-
+    char* fiveLetterAllWordLoader = malloc(6*sizeof(char));
+    fr = fopen("WORDS.txt", "r");
+    fr1 = fopen("ALLWORDS.txt", "r");
     while (fscanf(fr, "%s", fiveLetterWordLoader) != EOF && wordCounter < MAX_WORDS)
     {
         wordsList[wordCounter] = fiveLetterWordLoader;
         wordCounter++;
         fiveLetterWordLoader = malloc(6*sizeof(char));
     }
+    while (fscanf(fr1, "%s", fiveLetterAllWordLoader) != EOF && allWordCounter < ALL_WORDS)
+    {
+        allWordsList[allWordCounter] = fiveLetterAllWordLoader;
+        allWordCounter++;
+        fiveLetterAllWordLoader = malloc(6*sizeof(char));
+    }
     fclose(fr);
-    srand(time(NULL));
+    fclose(fr1);
 
+    srand(time(NULL));
     char* randAnswer = wordsList[rand()%wordCounter];
     int numOfGuesses = 0;
     int flag = 0;
@@ -191,9 +202,9 @@ void play()
                 break;
             }
         }
-        for(i=0;i<wordCounter;i++)
+        for(i=0;i<allWordCounter;i++)
         {
-            if(strcmp(guess,wordsList[i])==0)
+            if(strcmp(guess,allWordsList[i])==0)
             {
                 flag=1;
                 break;
